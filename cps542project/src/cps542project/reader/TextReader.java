@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import cps542project.store.TableDataStore;
+
 public class TextReader {
 
 	private Scanner scanner;
@@ -27,12 +29,16 @@ public class TextReader {
 
 	public static void main(String[] args) throws IOException {
 		TextReader tr = new TextReader();
-		tr.read(new File("anna_karenina.txt"));
+		TableDataStore tds = TableDataStore.getInstance();
+		tr.read(new File("sample.txt"));
 		String word = tr.next();
 		while(word != null){
 			System.out.println(word);
+			tds.store("sample.txt", word);
 			word = tr.next();
 		}
+		
+		System.out.println(tds.getDocument("sample.txt").getAllFrequencies());
 	}
 
 }
