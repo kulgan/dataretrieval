@@ -1,0 +1,7 @@
+For some hosts and  programs this will cause  no disruptions, but  for
+others some problems may arise.   For example, with over five  hundred
+entries in the table, the addition of 500 names could exceed the space
+allocated to  store  the table  in  some programs.   Another  possible
+problem is that period (or dot, ".")  is not now a legal character  in
+host names,  and some  programs may  not be  able to  parse these  new
+names.

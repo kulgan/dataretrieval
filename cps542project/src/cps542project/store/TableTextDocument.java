@@ -36,22 +36,22 @@ public class TableTextDocument {
 	public Integer getFrequency(String word){
 		return terms.get(word);
 	}
-	
+
 	public String getAllFrequencies(){
 		String result = "";
 		Set<String> keys = terms.keySet();
 		for (String key : keys) {
 			result += key + ", " + termFrequency(key) + "\n";
 		}
-		
+
 		return result;
 	}
-	
+
 	public BigDecimal termFrequency(String word){
 		Integer freq = getFrequency(word);
-		return new BigDecimal(freq).divide(wordCount);
+		return new BigDecimal(freq + "").divide(wordCount);
 	}
-	
+
 	public BigDecimal getWordCount() {
 		return wordCount;
 	}
