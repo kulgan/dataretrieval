@@ -2,9 +2,10 @@ package cps542project.analyzer;
 
 import java.math.BigDecimal;
 
-public class TermStats {
+public class TermStats implements Comparable<TermStats>{
 
 	private String term;
+	private Integer count;
 	private BigDecimal termFreq;
 
 	public TermStats() {
@@ -27,9 +28,36 @@ public class TermStats {
 		this.termFreq = termFreq;
 	}
 
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
 	@Override
 	public String toString() {
-		return term + ", " + termFreq.toPlainString();
+		return term + "\t \t" + count + "\t \t" + termFreq.toPlainString() + "\n";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		TermStats ts = (TermStats) obj;
+		if(ts.getTerm() == null || ts.getTermFreq() == null){
+			return false;
+		}
+		return ts.getTerm().equalsIgnoreCase(this.term) && ts.getTermFreq() == this.getTermFreq();
+	}
+
+	@Override
+	public int hashCode() {
+		return term.hashCode();
+	}
+
+	@Override
+	public int compareTo(TermStats o) {
+		return o.getCount().compareTo(this.getCount());
 	}
 
 }

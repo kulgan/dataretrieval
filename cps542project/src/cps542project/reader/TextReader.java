@@ -2,9 +2,12 @@ package cps542project.reader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
+import cps542project.analyzer.TermStats;
 import cps542project.store.TableDataStore;
+import cps542project.store.TableTextDocument;
 
 public class TextReader {
 
@@ -30,15 +33,22 @@ public class TextReader {
 	public static void main(String[] args) throws IOException {
 		TextReader tr = new TextReader();
 		TableDataStore tds = TableDataStore.getInstance();
-		tr.read(new File("sample.txt"));
+		tr.read(new File("leipzig1m.txt"));
 		String word = tr.next();
 		while(word != null){
-			System.out.println(word);
-			tds.store("sample.txt", word);
+			tds.store("leipzig1m.txt", word.toLowerCase());
 			word = tr.next();
 		}
-		
-		System.out.println(tds.getDocument("sample.txt").getAllFrequencies());
+		TableTextDocument dmt = tds.getDocument("leipzig1m.txt");
+		List<TermStats> freqs = dmt.getAllFrequencies();
+		System.out.println("Title: " + dmt.getTitle());
+		System.out.println("Total Words: " + dmt.getWordCount());
+		System.out.println("#. \t \t Term \t \t Count \t \t Frequency");
+		int z = 1;
+		for (TermStats termStats : freqs) {
+			System.out.println(z + " \t \t" + termStats);
+			z +=1;
+		}
 	}
 
 }

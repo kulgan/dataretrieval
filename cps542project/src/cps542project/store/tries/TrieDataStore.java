@@ -1,4 +1,4 @@
-package cps542project.store;
+package cps542project.store.tries;
 
 import java.util.HashMap;
 import java.util.Map;

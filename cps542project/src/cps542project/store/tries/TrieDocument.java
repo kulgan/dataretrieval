@@ -1,4 +1,4 @@
-package cps542project.store;
+package cps542project.store.tries;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +26,10 @@ public class TrieDocument<T> {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public BigDecimal getWordCount() {
+		return wordCount;
 	}
 
 	public T get(String key){

@@ -1,4 +1,4 @@
-package cps542project.store;
+package cps542project.store.tries;
 
 public class TrieTextDocument {
 

@@ -1,8 +1,14 @@
 package cps542project.store;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Set;
+
+import cps542project.analyzer.TermStats;
 
 public class TableTextDocument {
 
@@ -30,26 +36,30 @@ public class TableTextDocument {
 		else
 			i +=1;
 		terms.put(word, i);
-		wordCount.add(new BigDecimal("1"));
+		wordCount = wordCount.add(new BigDecimal("1"));
 	}
 
 	public Integer getFrequency(String word){
 		return terms.get(word);
 	}
 
-	public String getAllFrequencies(){
-		String result = "";
+	public List<TermStats> getAllFrequencies(){
+		List<TermStats> stats = new ArrayList<>();
 		Set<String> keys = terms.keySet();
 		for (String key : keys) {
-			result += key + ", " + termFrequency(key) + "\n";
+			TermStats ts = new TermStats();
+			ts.setTerm(key);
+			ts.setCount(getFrequency(key));
+			ts.setTermFreq(termFrequency(key));
+			stats.add(ts);
 		}
-
-		return result;
+		Collections.sort(stats);
+		return stats;
 	}
 
 	public BigDecimal termFrequency(String word){
 		Integer freq = getFrequency(word);
-		return new BigDecimal(freq + "").divide(wordCount);
+		return new BigDecimal(String.valueOf(freq), MathContext.DECIMAL32).divide(wordCount, MathContext.DECIMAL32);
 	}
 
 	public BigDecimal getWordCount() {

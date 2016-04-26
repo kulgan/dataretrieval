@@ -16,6 +16,8 @@ import javax.swing.JFileChooser;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
 import java.awt.Insets;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -25,7 +27,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.CardLayout;
 
@@ -55,7 +56,7 @@ public class Application extends JFrame {
 	private JLabel demoTitle;
 	private JButton btnDocuments;
 	private JButton btnQuery;
-	
+
 	private CardLayout layout;
 
 	/**
@@ -65,6 +66,7 @@ public class Application extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 					Application frame = new Application();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -81,24 +83,24 @@ public class Application extends JFrame {
 		setTitle("CPS 542 Project");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 733, 501);
-		
+
 		layout = new CardLayout(0, 0);
-		
+
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		mnFile = new JMenu("File");
 		menuBar.add(mnFile);
-		
+
 		mntmDocuments = new JMenuItem("Documents");
 		mnFile.add(mntmDocuments);
-		
+
 		mntmSearch = new JMenuItem("Search");
 		mnFile.add(mntmSearch);
-		
+
 		mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
-		
+
 		mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		contentPane = new JPanel();
@@ -112,7 +114,7 @@ public class Application extends JFrame {
 	}
 
 	private void loadUI(){
-		
+
 		titlePanel = new JPanel();
 		titlePanel.setBackground(Color.WHITE);
 		contentPane.add(titlePanel, BorderLayout.NORTH);
@@ -122,7 +124,7 @@ public class Application extends JFrame {
 		gbl_titlePanel.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_titlePanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		titlePanel.setLayout(gbl_titlePanel);
-		
+
 		demoTitle = new JLabel("CPS 542 Project: Term Weighing Demo");
 		demoTitle.setBackground(Color.WHITE);
 		GridBagConstraints gbc_demoTitle = new GridBagConstraints();
@@ -131,7 +133,7 @@ public class Application extends JFrame {
 		gbc_demoTitle.gridx = 0;
 		gbc_demoTitle.gridy = 0;
 		titlePanel.add(demoTitle, gbc_demoTitle);
-		
+
 		btnDocuments = new JButton("Documents");
 		btnDocuments.setActionCommand("DataLoadView");
 		GridBagConstraints gbc_btnDocuments = new GridBagConstraints();
@@ -140,7 +142,7 @@ public class Application extends JFrame {
 		gbc_btnDocuments.gridx = 1;
 		gbc_btnDocuments.gridy = 0;
 		titlePanel.add(btnDocuments, gbc_btnDocuments);
-		
+
 		btnQuery = new JButton("Query");
 		btnQuery.setActionCommand("SearchView");
 		GridBagConstraints gbc_btnQuery = new GridBagConstraints();
@@ -164,7 +166,7 @@ public class Application extends JFrame {
 		btnLoad.setActionCommand("LoadFile");
 		layout.show(main, "data-view");
 	}
-	
+
 	private void addViews(){
 		DataLoadiView dv = new DataLoadiView();
 		main.add(dv, "data-view");
@@ -180,7 +182,7 @@ public class Application extends JFrame {
 		Listener listener = new Listener();
 		btnSelect.addActionListener(listener);
 		btnLoad.addActionListener(listener);
-		
+
 		btnQuery.addActionListener(listener);
 		btnDocuments.addActionListener(listener);
 	}
