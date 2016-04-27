@@ -8,6 +8,7 @@ import java.util.Scanner;
 import cps542project.analyzer.TermStats;
 import cps542project.store.TableDataStore;
 import cps542project.store.TableTextDocument;
+import cps542project.store.tries.SuffixArray;
 
 public class TextReader {
 
@@ -36,9 +37,14 @@ public class TextReader {
 		tr.read(new File("leipzig1m.txt"));
 		String word = tr.next();
 		while(word != null){
-			tds.store("leipzig1m.txt", word.toLowerCase());
-			word = tr.next();
+//			tds.store("leipzig1m.txt", word.toLowerCase());
+			word += tr.next();
 		}
+
+		SuffixArray sa = new SuffixArray(word);
+		System.out.println(sa.length());
+
+
 		TableTextDocument dmt = tds.getDocument("leipzig1m.txt");
 		List<TermStats> freqs = dmt.getAllFrequencies();
 		System.out.println("Title: " + dmt.getTitle());
@@ -46,7 +52,7 @@ public class TextReader {
 		System.out.println("#. \t \t Term \t \t Count \t \t Frequency");
 		int z = 1;
 		for (TermStats termStats : freqs) {
-			System.out.println(z + " \t \t" + termStats);
+			System.out.println(z + "," + termStats);
 			z +=1;
 		}
 	}

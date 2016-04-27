@@ -3,6 +3,8 @@ package cps542project.store;
 import java.util.HashMap;
 import java.util.Map;
 
+import cps542project.store.tries.SuffixArray;
+
 public class TableDataStore {
 
 	private static TableDataStore store;
@@ -41,6 +43,10 @@ public class TableDataStore {
 	public Integer getFrequency(String doc, String word){
 		TableTextDocument td = getDocument(doc);
 		return td.getFrequency(word);
+	}
+	
+	public static void main(String[] args) {
+		SuffixArray sa = new SuffixArray("");
 	}
 
 }
