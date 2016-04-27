@@ -38,7 +38,7 @@ public class TermStats implements Comparable<TermStats>{
 
 	@Override
 	public String toString() {
-		return term + "," + count + "," + termFreq.toPlainString();
+		return term + "\t \t" + count + "\t \t" + termFreq.toPlainString();
 	}
 
 	@Override

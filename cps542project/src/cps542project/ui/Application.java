@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import cps542project.reader.TextReader;
 import cps542project.store.TableDataStore;
+import cps542project.store.tries.TrieDataStore;
 
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
@@ -66,7 +67,7 @@ public class Application extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 					Application frame = new Application();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -111,6 +112,7 @@ public class Application extends JFrame {
 
 		loadUI();
 		addListeners();
+		initStore();
 	}
 
 	private void loadUI(){
@@ -185,6 +187,26 @@ public class Application extends JFrame {
 
 		btnQuery.addActionListener(listener);
 		btnDocuments.addActionListener(listener);
+	}
+	
+	private void initStore(){
+		try {
+			File r = new File("leipzig1m.txt");
+			TextReader tr = new TextReader();
+//			TableDataStore tds = TableDataStore.getInstance();
+			TrieDataStore trds = TrieDataStore.getInstance();
+			tr.read(r);
+			String word = tr.next();
+			int z = 1;
+			while(word != null){
+				trds.store(r.getName(), word.toLowerCase(), z);
+				word = tr.next();
+				z +=1;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	class Listener implements ActionListener{
